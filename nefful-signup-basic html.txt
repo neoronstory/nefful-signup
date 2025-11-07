@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Nefful with My Sponsor ID</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 10%;
+      background-color: #f5f7fb;
+    }
+    h2 {
+      color: #1a3c75;
+    }
+    p {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #2a67b1;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background-color: #1d4f8d;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h2>Join Nefful International</h2>
+  <p>Click below to open the official Nefful enrollment page — your sponsor number will be filled in automatically.</p>
+  <button onclick="openForm()">Join Now</button>
+
+  <script>
+    function openForm() {
+      const sponsorId = "SG789012"; // ← replace with your real Sponsor ID
+      const popup = window.open("https://extranet.neffulintl.com/nefful/signup/EnrollNew_Ask.asp", "_blank");
+
+      // Try repeatedly to inject the sponsor ID and highlight it
+      const interval = setInterval(() => {
+        try {
+          const input = popup.document.querySelector('#RepDID');
+          if (input) {
+            input.value = sponsorId;
+            input.style.backgroundColor = 'yellow';
+            input.style.border = '2px solid #ffb400';
+            input.focus();
+            clearInterval(interval);
+          }
+        } catch (e) {
+          // Ignore cross-origin errors until the page becomes accessible
+        }
+      }, 600);
+    }
+  </script>
+</body>
+</html>
